@@ -1,0 +1,16 @@
+name: FluffEssentials
+version: 0.1.2
+main: me.fluffy.fluffessentials.MainLoader
+description: Essentials, with only the essential crap that probably runs like crap.
+commands:
+  tpa:
+  tpaccept:
+  tpdeny:
+  clock:
+  sethome:
+  home:
+  pay:
+  balance:
+  deposit:
+  readannouncement:
+  announce:
