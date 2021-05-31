@@ -29,62 +29,62 @@ public class TimeCommands implements CommandExecutor {
         String month;
         String season;
         if(dayOfYear >= 0 && dayOfYear <= 29){
-            month ="Solris";
+            month ="January";
             day = dayOfYear + 1;
             season = ChatColor.WHITE + "Winter";
 
         } else if(dayOfYear >= 30 && dayOfYear <= 59){
-            month ="Lovrum";
+            month ="Feburary";
             day = dayOfYear - 29;
             season = ChatColor.WHITE + "Winter";
 
         } else if(dayOfYear >= 60 && dayOfYear <= 90){
-            month ="Ranum";
+            month ="March";
             day = dayOfYear - 59;
             season = ChatColor.LIGHT_PURPLE + "Spring";
 
         } else if(dayOfYear >= 91 && dayOfYear <= 120){
-            month ="Sprom";
+            month ="April";
             day = dayOfYear - 90;
             season = ChatColor.LIGHT_PURPLE + "Spring";
 
         } else if(dayOfYear >= 121 && dayOfYear <= 151){
-            month ="Umbris";
+            month ="May";
             day = dayOfYear - 120;
             season = ChatColor.LIGHT_PURPLE + "Spring";
 
         } else if(dayOfYear >= 152 && dayOfYear <= 181){
-            month ="Iunif";
+            month ="June";
             day = dayOfYear - 151;
             season = ChatColor.YELLOW + "Summer";
 
         } else if(dayOfYear >= 182 && dayOfYear <= 212){
-            month ="Hetum";
+            month ="July";
             day = dayOfYear - 181;
             season = ChatColor.YELLOW + "Summer";
 
         } else if(dayOfYear >= 213 && dayOfYear <= 242){
-            month ="Scolif";
+            month ="August";
             day = dayOfYear - 212;
             season = ChatColor.YELLOW + "Summer";
 
         } else if(dayOfYear >= 243 && dayOfYear <= 273){
-            month ="Lefum";
+            month ="September";
             day = dayOfYear - 242;
             season = ChatColor.DARK_GREEN + "Fall";
 
         } else if(dayOfYear >= 274 && dayOfYear <= 303){
-            month ="Spokus";
+            month ="October";
             day = dayOfYear - 273;
             season = ChatColor.DARK_GREEN + "Fall";
 
         } else if(dayOfYear >= 304 && dayOfYear <= 334){
-            month ="Turkif";
+            month ="November";
             day = dayOfYear - 303;
             season = ChatColor.DARK_GREEN + "Fall";
 
         } else if(dayOfYear >= 335){
-            month ="Solsut";
+            month ="December";
             day = dayOfYear - 334;
             season = ChatColor.WHITE + "Winter";
 

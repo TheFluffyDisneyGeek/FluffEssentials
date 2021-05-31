@@ -27,8 +27,12 @@ public class TeleportCommands implements CommandExecutor {
         if(commandSender instanceof Player) {
             Player p = (Player) commandSender;
             if (label.equalsIgnoreCase("tpa")) {
+                if(args.length == 0){ // all this is input validation
+                    p.sendMessage(ChatColor.RED + "You didn't specify a player!");
+                    return false;
+                }
                 Player target = Bukkit.getPlayer(args[0]);
-                if(target == null){ //all this is input validation
+                if(target == null){
                     p.sendMessage(ChatColor.RED + "Invalid Player!");
                     return false;
                 }
@@ -40,24 +44,28 @@ public class TeleportCommands implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "You can only send one request at a time!");
                     return false;
                 }
-                target.sendMessage(ChatColor.GREEN + target.getName() + ChatColor.GOLD + " has requested to teleport to you! \n" + ChatColor.GREEN + "/tpaccept " + ChatColor.GOLD + "to accept.");
+                target.sendMessage(ChatColor.GREEN + p.getName() + ChatColor.GOLD + " has requested to teleport to you! \n" + ChatColor.GREEN + "/tpaccept " + ChatColor.GOLD + "to accept.");
                 Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
-                        if(dataInit.getPlayerData(p).getCurrentRequest() != null){
-                            if(dataInit.getPlayerData(p).getCurrentRequest().getTarget().equals(target)){
-                                p.sendMessage(ChatColor.RED + "Your request has expired!");
-                                int requestIndex = 5000;
-                                ArrayList<TeleportRequest> requests = dataInit.getPlayerData(dataInit.getPlayerData(p).getCurrentRequest().getTarget()).getRequests();
-                                for(TeleportRequest t:requests){
-                                    if(t.getSender() == p){
-                                        requestIndex = requests.indexOf(t);
-                                        dataInit.getPlayerData(t.getSender()).endRequest();
-                                        break;
-                                        //this avoids the ConcurrentModificationException error
+                        if (dataInit.getPlayerData(p) != null) { // Make sure player hasn't left
+                            if (dataInit.getPlayerData(p).getCurrentRequest() != null) { // Check if Request hasn't been accepted/denied already
+                                if (dataInit.getPlayerData(p).getCurrentRequest().getTarget() != null) { // Check if target hasn't left
+                                    if (dataInit.getPlayerData(p).getCurrentRequest().getTarget().equals(target)) {
+                                        p.sendMessage(ChatColor.RED + "Your request has expired!");
+                                        int requestIndex = 5000;
+                                        ArrayList<TeleportRequest> requests = dataInit.getPlayerData(dataInit.getPlayerData(p).getCurrentRequest().getTarget()).getRequests();
+                                        for (TeleportRequest t : requests) {
+                                            if (t.getSender() == p) {
+                                                requestIndex = requests.indexOf(t);
+                                                dataInit.getPlayerData(t.getSender()).endRequest();
+                                                break;
+                                                //this avoids the ConcurrentModificationException error
+                                            }
+                                        }
+                                        requests.remove(requestIndex);
                                     }
                                 }
-                                requests.remove(requestIndex);
                             }
                         }
                     }
